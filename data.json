@@ -2,7 +2,7 @@
   "startups": [
     {
       "id": 1,
-      "name": "Bolt",
+      "name": "<style>.card-img{display:block!important;height:180px!important;margin:-26px -26px 18px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{height:150px!important}@media(max-width:640px){.card-img{height:155px!important;margin:-22px -22px 18px!important;border-radius:22px 22px 0 0!important}}</style>Bolt",
       "tagline": "Mobility super app",
       "description": "Estonian mobility company offering ride-hailing, scooters, car sharing and food delivery.",
       "industry": "Mobility",
@@ -24,7 +24,7 @@
       "founders": "Kaarel Kotkas",
       "website": "https://veriff.com",
       "video": "https://youtu.be/Mxr5ca2bUvw?si=uCYp0vnXPowNBmbO",
-      "image": ""
+      "image": "images/images (9).jpeg"
     }
   ],
   "projects": [

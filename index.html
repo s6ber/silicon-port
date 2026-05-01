@@ -5,30 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Silicon Port</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111; }
-
-/* HOMEPAGE */
-.homepage {
-  background:#111 url('file_0000000001787246833b6198b7d40451~2.png') center center/contain no-repeat;
-  min-height:100vh;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:5%;
-}
-.hero-btn {
-  padding:20px 40px;
-  font-size:22px;
-  background:rgba(0,0,0,0.6);
-  color:white;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  backdrop-filter: blur(8px);
-}
-.hero-btn:hover { background:white; color:#111; }
 
 /* TOPBAR */
 .topbar {
@@ -40,6 +20,48 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 .logo { font-weight:700; cursor:pointer; }
+
+/* HOMEPAGE */
+.homepage { min-height:100vh; background:#111; }
+.home-hero {
+  position:relative;
+  min-height:calc(100vh - 56px);
+  background:#111 url('file_0000000001787246833b6198b7d40451~2.png') center center/contain no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.hero-copy {
+  color:white;
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:0.04em;
+  text-shadow:0 2px 18px rgba(0,0,0,0.75);
+  max-width:70%;
+}
+.hero-copy h1 {
+  margin:0 0 10px;
+  font-size:28px;
+  font-weight:700;
+}
+.hero-copy p { margin:0; }
+.hero-icon {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  border:none;
+  background:transparent;
+  color:white;
+  font-size:34px;
+  cursor:pointer;
+  padding:18px;
+  text-shadow:0 2px 18px rgba(0,0,0,0.9);
+}
+.hero-icon:hover { opacity:0.75; }
+.hero-icon.left { left:14px; }
+.hero-icon.right { right:14px; }
 
 /* DROPDOWN MENU */
 .menu {
@@ -91,17 +113,55 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 .primary { background:#0066ff; color:white; }
 .secondary { background:#eee; color:#111; }
 .muted { color:#666; }
+
+/* FOOTER */
+.footer {
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:48px 20px;
+}
+.footer h3 { margin:0 0 8px; font-size:18px; }
+.footer p { margin:6px 0; color:#d0d0d0; }
+.footer-links { margin:28px 0; display:flex; flex-direction:column; gap:16px; }
+.footer-links a { color:#d0d0d0; text-decoration:none; font-size:18px; }
+.socials { display:flex; justify-content:center; gap:16px; margin-top:20px; }
+.socials a { color:white; border:1px solid white; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; }
 </style>
 </head>
 <body>
 
 <!-- HOMEPAGE -->
 <div class="homepage" id="home">
-  <button class="hero-btn" onclick="showPage('information')">Information</button>
-  <button class="hero-btn" onclick="showPage('business')">Business</button>
+  <div class="topbar">
+    <div class="logo" onclick="toggleMenu()">Silicon Port</div>
+  </div>
+  <div class="home-hero">
+    <button class="hero-icon left" onclick="showPage('information')" aria-label="Information"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="hero-copy">
+      <h1>Silicon Port</h1>
+      <p>Estonia’s startup gateway</p>
+    </div>
+    <button class="hero-icon right" onclick="showPage('business')" aria-label="Business"><i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+  <footer class="footer">
+    <h3>Silicon Port is open for builders, founders and investors</h3>
+    <p>Tallinn, Estonia</p>
+    <p>info@siliconport.ee</p>
+    <div class="footer-links">
+      <a href="#" onclick="loadInfo('contact')">Contact us</a>
+      <a href="#" onclick="loadInfo('about')">About us</a>
+      <a href="#" onclick="loadGrants()">Business & Startup Grants</a>
+    </div>
+    <p>Follow us on Instagram and Facebook</p>
+    <div class="socials">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
+  </footer>
 </div>
 
-<!-- TOPBAR -->
+<!-- TOPBAR FOR INNER PAGES -->
 <div class="topbar" id="topbar" style="display:none;">
   <div class="logo" onclick="toggleMenu()">Silicon Port</div>
 </div>
@@ -174,7 +234,7 @@ function showInformationPage(){ showPage('information'); }
 function toggleMenu(){ document.getElementById('menu').classList.toggle('active'); }
 function toggleSubmenu(id){ let el=document.getElementById(id); el.style.display = el.style.display==='block' ? 'none' : 'block'; }
 function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
-function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='flex'; document.getElementById('topbar').style.display='none'; }
+function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='block'; document.getElementById('topbar').style.display='none'; }
 
 async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; data.startups.forEach(s=>{ html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
 async function openStartup(id){ const data=await fetchData(); let s=data.startups.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button><div class="section"><h3>Overview</h3><p>${s.description}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`; }

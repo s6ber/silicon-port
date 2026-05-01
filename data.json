@@ -2,7 +2,7 @@
   "startups": [
     {
       "id": 1,
-      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style><div class=\"card-img\" style=\"background-image:url('images/images (9).png')\"></div>Bolt",
+      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style>Bolt",
       "tagline": "Mobility super app",
       "description": "Estonian mobility company offering ride-hailing, scooters, car sharing and food delivery.",
       "industry": "Mobility",
@@ -15,7 +15,7 @@
     },
     {
       "id": 2,
-      "name": "<div class=\"card-img\" style=\"background-image:url('images/images (9).png')\"></div>Veriff",
+      "name": "Veriff",
       "tagline": "Identity verification platform",
       "description": "AI-powered identity verification company helping businesses verify users online.",
       "industry": "Fintech / Identity",

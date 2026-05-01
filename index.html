@@ -114,6 +114,13 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 .page { display:none; }
 .active { display:block; }
 .main { padding:30px; }
+.intro-hero { background:white; padding:42px 30px; border-bottom:1px solid #eee; }
+.intro-hero h1 { margin:0 0 10px; font-size:34px; }
+.intro-hero p { margin:0; color:#666; max-width:760px; }
+.intro-section { background:white; padding:24px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); margin-bottom:22px; }
+.intro-section h2 { margin:0 0 8px; }
+.carousel { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding:14px 0 18px; }
+.carousel .card { min-width:240px; scroll-snap-align:start; }
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
 .card { background:white; padding:20px; border-radius:12px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
 .card:hover { transform:translateY(-3px); transition:0.2s; }
@@ -149,12 +156,12 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
   </div>
   <div class="home-hero">
     <img class="hero-img" src="file_0000000001787246833b6198b7d40451~2.png" alt="Tallinn skyline with circuit board sailing boats">
-    <button class="hero-icon left" onclick="showPage('information')" aria-label="Information"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="hero-icon left" onclick="loadBusinessIntro()" aria-label="Business"><i class="fa-solid fa-arrow-left"></i></button>
     <div class="hero-copy">
       <h1>Silicon Port</h1>
       <p>Estonia’s startup gateway</p>
     </div>
-    <button class="hero-icon right" onclick="showPage('business')" aria-label="Business"><i class="fa-solid fa-arrow-right"></i></button>
+    <button class="hero-icon right" onclick="loadInfoIntro()" aria-label="Information"><i class="fa-solid fa-arrow-right"></i></button>
   </div>
   <footer class="footer">
     <h3>Silicon Port is open for builders, founders and investors</h3>
@@ -204,6 +211,7 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 <!-- INFORMATION PAGE -->
 <div class="page" id="information">
   <div class="nav">
+    <button onclick="loadInfoIntro()">Information Port</button>
     <button onclick="loadInfo('news')">News</button>
     <button onclick="loadInfo('stats')">Business Stats</button>
     <button onclick="loadInfo('history')">History</button>
@@ -216,6 +224,7 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 <!-- BUSINESS PAGE -->
 <div class="page" id="business">
   <div class="nav">
+    <button onclick="loadBusinessIntro()">Business Port</button>
     <button onclick="loadStartups()">Startups</button>
     <button onclick="loadProjects()">Projects</button>
     <button onclick="loadGrants()">Grants</button>
@@ -256,8 +265,38 @@ function toggleSubmenu(id){ let el=document.getElementById(id); el.style.display
 function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
 function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='block'; document.getElementById('topbar').style.display='none'; }
 
+async function loadBusinessIntro(){
+  showBusinessPage(); closeMenu(); const data=await fetchData();
+  let html='<div class="intro-hero"><h1>Welcome to the Port of Business</h1><p>Explore Estonia’s startup ecosystem, pilot projects, grants, tax system and e-residency opportunities.</p></div>';
+  html+='<div class="intro-section"><h2>Startups</h2><p class="muted">On the startup page you can find all major Estonian startups.</p><div class="carousel">';
+  data.startups.forEach(s=> html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`);
+  html+='</div><button class="btn primary" onclick="loadStartups()">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>Projects</h2><p class="muted">Find current pilot projects and collaboration opportunities in the Silicon Port ecosystem.</p><div class="carousel">';
+  data.projects.forEach(p=> html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`);
+  html+='</div><button class="btn primary" onclick="loadProjects()">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>Grants</h2><p class="muted">Browse business and startup grants that can help founders fund growth.</p><div class="carousel">';
+  data.grants.forEach(g=> html+=`<div class="card" onclick="openGrant(${g.id})"><h3>${g.name}</h3><p>${g.description}</p></div>`);
+  html+='</div><button class="btn primary" onclick="loadGrants()">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>Tax System 101</h2><p class="muted">Understand Estonia’s startup-friendly tax system, payroll taxes, VAT and company basics.</p><button class="btn primary" onclick="loadTax()">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>E-Residency</h2><p class="muted">Learn how international founders can use Estonian e-residency to manage a company online.</p><button class="btn primary" onclick="loadEResidency()">Go to Page</button></div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+async function loadInfoIntro(){
+  showInformationPage(); closeMenu(); const data=await fetchData();
+  let html='<div class="intro-hero"><h1>Welcome to the Port of Information</h1><p>Explore news, startup statistics, Estonia’s digital history and Silicon Port contact information.</p></div>';
+  html+='<div class="intro-section"><h2>News</h2><p class="muted">On the news page you can follow the latest Estonian startup ecosystem updates.</p><div class="carousel">';
+  data.news.forEach(n=> html+=`<div class="card" onclick="openNews(${n.id})"><h3>${n.title}</h3><p>${n.summary}</p></div>`);
+  html+='</div><button class="btn primary" onclick="loadInfo(\'news\')">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>Business Stats</h2><p class="muted">See key startup, investment and business statistics for Estonia.</p><button class="btn primary" onclick="loadInfo(\'stats\')">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>History</h2><p class="muted">Learn the story of Estonia as a digital nation and startup ecosystem.</p><button class="btn primary" onclick="loadInfo(\'history\')">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>About Us</h2><p class="muted">Understand the mission behind Silicon Port and why it exists.</p><button class="btn primary" onclick="loadInfo(\'about\')">Go to Page</button></div>';
+  html+='<div class="intro-section"><h2>Contact Us</h2><p class="muted">Find contact details and ways to reach Silicon Port.</p><button class="btn primary" onclick="loadInfo(\'contact\')">Go to Page</button></div>';
+  document.getElementById('info-content').innerHTML=html;
+}
+
 async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; data.startups.forEach(s=>{ html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
 async function openStartup(id){
+  showBusinessPage(); closeMenu();
   const data=await fetchData();
   let s=data.startups.find(x=>x.id===id);
   const embedUrl = getYouTubeEmbed(s.video);
@@ -265,13 +304,13 @@ async function openStartup(id){
   document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button>${videoHTML}<div class="section"><h3>Overview</h3><p>${s.description}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`;
 }
 async function loadProjects(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Projects</h2><p class="muted">Current pilot projects. Click a project to see details and join.</p><div class="grid">'; data.projects.forEach(p=>{ html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openProject(id){ const data=await fetchData(); let p=data.projects.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${p.name}</h1><p>${p.description}</p><button class="btn primary" onclick="window.open('${p.form}', '_blank')">Join Project</button><button class="btn secondary" onclick="loadProjects()">Back</button><div class="section"><h3>Project Details</h3><p><strong>Status:</strong> ${p.status}</p><p><strong>Organizer:</strong> ${p.organizer}</p><p><strong>Timeline:</strong> ${p.timeline}</p></div>`; }
+async function openProject(id){ showBusinessPage(); closeMenu(); const data=await fetchData(); let p=data.projects.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${p.name}</h1><p>${p.description}</p><button class="btn primary" onclick="window.open('${p.form}', '_blank')">Join Project</button><button class="btn secondary" onclick="loadProjects()">Back</button><div class="section"><h3>Project Details</h3><p><strong>Status:</strong> ${p.status}</p><p><strong>Organizer:</strong> ${p.organizer}</p><p><strong>Timeline:</strong> ${p.timeline}</p></div>`; }
 async function loadGrants(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Grants</h2><p class="muted">Browse grants and open each grant page for eligibility, amount and links.</p><div class="grid">'; data.grants.forEach(g=>{ html+=`<div class="card" onclick="openGrant(${g.id})"><h3>${g.name}</h3><p>${g.description}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openGrant(id){ const data=await fetchData(); let g=data.grants.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${g.name}</h1><p>${g.description}</p><button class="btn primary" onclick="window.open('${g.link}', '_blank')">More Details</button><button class="btn secondary" onclick="loadGrants()">Back</button><div class="section"><h3>Grant Details</h3><p><strong>Amount:</strong> ${g.amount}</p><p><strong>Eligibility:</strong> ${g.eligibility}</p><p><strong>Deadline:</strong> ${g.deadline}</p></div>`; }
+async function openGrant(id){ showBusinessPage(); closeMenu(); const data=await fetchData(); let g=data.grants.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${g.name}</h1><p>${g.description}</p><button class="btn primary" onclick="window.open('${g.link}', '_blank')">More Details</button><button class="btn secondary" onclick="loadGrants()">Back</button><div class="section"><h3>Grant Details</h3><p><strong>Amount:</strong> ${g.amount}</p><p><strong>Eligibility:</strong> ${g.eligibility}</p><p><strong>Deadline:</strong> ${g.deadline}</p></div>`; }
 async function loadTax(){ showBusinessPage(); closeMenu(); const data=await fetchData(); const t=data.tax; let html=`<h1>${t.title}</h1>`; t.intro.forEach(p=> html += `<p class="muted">${p}</p>`); t.sections.forEach(sec=>{ html += `<div class="section"><h3>${sec.heading}</h3>`; sec.items.forEach(item=> html += `<p>${item}</p>`); html += `</div>`; }); html += `<div class="section"><h3>Useful Links</h3>`; t.links.forEach(link=>{ html += `<button class="btn primary" onclick="window.open('${link.url}', '_blank')">${link.label}</button>`; }); html += `</div>`; document.getElementById('biz-content').innerHTML=html; }
 async function loadEResidency(){ showBusinessPage(); closeMenu(); const data=await fetchData(); const e=data.eresidency; let html=`<h1>${e.title}</h1><p class="muted">${e.intro}</p>`; e.sections.forEach(sec=>{ html+=`<div class="section"><h3>${sec.heading}</h3>`; sec.items.forEach(item=> html+=`<p>${item}</p>`); if(sec.button){ html+=`<button class="btn primary" onclick="window.open('${sec.button.url}', '_blank')">${sec.button.label}</button>`; } html+=`</div>`; }); document.getElementById('biz-content').innerHTML=html; }
 async function loadNews(){ showInformationPage(); closeMenu(); const data=await fetchData(); let html='<h1>News</h1><p class="muted">Browse startup ecosystem news and open each article for full details.</p><div class="grid">'; data.news.forEach(n=>{ html+=`<div class="card" onclick="openNews(${n.id})"><h3>${n.title}</h3><p>${n.summary}</p></div>`; }); html+='</div>'; document.getElementById('info-content').innerHTML=html; }
-async function openNews(id){ const data=await fetchData(); let n=data.news.find(x=>x.id===id); document.getElementById('info-content').innerHTML=`<h1>${n.title}</h1><p>${n.summary}</p><button class="btn primary" onclick="window.open('${n.source}', '_blank')">Original News Piece</button><button class="btn secondary" onclick="loadNews()">Back</button><div class="section"><h3>Article</h3><p>${n.article}</p></div>`; }
+async function openNews(id){ showInformationPage(); closeMenu(); const data=await fetchData(); let n=data.news.find(x=>x.id===id); document.getElementById('info-content').innerHTML=`<h1>${n.title}</h1><p>${n.summary}</p><button class="btn primary" onclick="window.open('${n.source}', '_blank')">Original News Piece</button><button class="btn secondary" onclick="loadNews()">Back</button><div class="section"><h3>Article</h3><p>${n.article}</p></div>`; }
 async function loadInfo(type){ showInformationPage(); closeMenu(); const data=await fetchData(); if(type==='news') return loadNews(); const info=data.information[type]; document.getElementById('info-content').innerHTML=`<h1>${info.title}</h1><div class="section"><p>${info.content}</p></div>`; }
 </script>
 </body>

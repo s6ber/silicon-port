@@ -1,31 +1,98 @@
-// shortened for update
-function loadTax(){
-  showBusinessPage();
-  closeMenu();
-
-  fetch('tax.json')
-    .then(res => res.json())
-    .then(data => {
-      let html = `<h1>${data.title}</h1>`;
-      data.intro.forEach(p => html += `<p class="muted">${p}</p>`);
-
-      data.sections.forEach(sec => {
-        html += `<div class="section"><h3>${sec.heading}</h3>`;
-        sec.items.forEach(item => {
-          html += `<p>${item}</p>`;
-        });
-        html += `</div>`;
-      });
-
-      html += `<div class="section"><h3>Useful Links</h3>`;
-      data.links.forEach(link => {
-        html += `<button class="btn primary" onclick="window.open('${link.url}', '_blank')">${link.label}</button>`;
-      });
-      html += `</div>`;
-
-      document.getElementById('biz-content').innerHTML = html;
-    })
-    .catch(err => {
-      document.getElementById('biz-content').innerHTML = '<p>Error loading tax data</p>';
-    });
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+async function fetchData(){
+  return fetch('data.json').then(r=>r.json());
 }
+
+async function loadTax(){
+  showBusinessPage(); closeMenu();
+  const data = await fetchData();
+  const t = data.tax;
+
+  let html = `<h1>${t.title}</h1>`;
+  t.intro.forEach(p=> html += `<p class="muted">${p}</p>`);
+
+  t.sections.forEach(sec=>{
+    html += `<div class="section"><h3>${sec.heading}</h3>`;
+    sec.items.forEach(i=> html += `<p>${i}</p>`);
+    html += `</div>`;
+  });
+
+  html += `<div class="section"><h3>Useful Links</h3>`;
+  t.links.forEach(l=> html += `<button class="btn primary" onclick="window.open('${l.url}')">${l.label}</button>`);
+  html += `</div>`;
+
+  document.getElementById('biz-content').innerHTML = html;
+}
+
+async function loadStartups(){
+  showBusinessPage(); closeMenu();
+  const data = await fetchData();
+  let html='<h2>Startups</h2><div class="grid">';
+  data.startups.forEach(s=>{
+    html+=`<div class="card"><h3>${s.name}</h3><p>${s.tagline}</p></div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function loadProjects(){
+  showBusinessPage(); closeMenu();
+  const data = await fetchData();
+  let html='<h2>Projects</h2><div class="grid">';
+  data.projects.forEach(p=>{
+    html+=`<div class="card"><h3>${p.name}</h3><p>${p.status}</p></div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function loadGrants(){
+  showBusinessPage(); closeMenu();
+  const data = await fetchData();
+  let html='<h2>Grants</h2><div class="grid">';
+  data.grants.forEach(g=>{
+    html+=`<div class="card"><h3>${g.name}</h3><p>${g.description}</p></div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function loadEResidency(){
+  showBusinessPage(); closeMenu();
+  const data = await fetchData();
+  const e = data.eresidency;
+
+  let html=`<h1>${e.title}</h1><p>${e.intro}</p>`;
+  e.sections.forEach(sec=>{
+    html+=`<div class="section"><h3>${sec.heading}</h3>`;
+    sec.items.forEach(i=> html+=`<p>${i}</p>`);
+    if(sec.button){
+      html+=`<button class="btn primary" onclick="window.open('${sec.button.url}')">${sec.button.label}</button>`;
+    }
+    html+='</div>';
+  });
+
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function loadInfo(type){
+  showInformationPage(); closeMenu();
+  const data = await fetchData();
+
+  if(type==='news'){
+    let html='<h1>News</h1><div class="grid">';
+    data.news.forEach(n=> html+=`<div class="card"><h3>${n.title}</h3><p>${n.summary}</p></div>`);
+    html+='</div>';
+    return document.getElementById('info-content').innerHTML=html;
+  }
+
+  const info = data.information[type];
+  document.getElementById('info-content').innerHTML = `<h1>${info.title}</h1><div class="section"><p>${info.content}</p></div>`;
+}
+</script>
+</head>
+<body></body>
+</html>

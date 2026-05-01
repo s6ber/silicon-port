@@ -52,6 +52,7 @@ body::before{
 /* HOMEPAGE */
 .homepage { min-height:100vh; background:#111; }
 .home-hero {
+  display:block;
   position:relative;
   width:100%;
   height:auto;
@@ -76,7 +77,7 @@ body::before{
 }
 .hero-copy {
   position:absolute;
-  top:50%;
+  top:25%;
   left:50%;
   transform:translate(-50%,-50%);
   color:white;
@@ -227,7 +228,7 @@ body::before{
 
 @media (max-width: 640px){
   .topbar{padding:14px 18px;}
-  .hero-copy{top:50%; max-width:84%;}
+  .hero-copy{top:27%; max-width:84%;}
   .hero-copy h1{font-size:clamp(40px,14vw,64px);}
   .hero-copy p{font-size:clamp(17px,5vw,23px);}
   .hero-icon{width:50px;height:50px;font-size:22px;padding:0;}
@@ -330,6 +331,26 @@ body::before{
 </div>
 
 <script>
+const fallbackImage = "file_0000000001787246833b6198b7d40451~2.png";
+
+function imageOf(item){
+  return item.image && item.image.trim() !== "" 
+    ? item.image 
+    : fallbackImage;
+}
+
+function startupCard(s){
+  return `
+    <div class="card" onclick="openStartup(${s.id})">
+      <div class="card-img" style="background-image:url('${imageOf(s)}')"></div>
+      <div class="card-body">
+        <h3>${s.name}</h3>
+        <p>${s.tagline}</p>
+        <p class="muted">${s.industry}</p>
+      </div>
+    </div>`;
+}
+
 let siteData = null;
 async function fetchData(){
   if(siteData) return siteData;

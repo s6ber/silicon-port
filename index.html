@@ -364,7 +364,8 @@ async function loadBusinessIntro(){
   showBusinessPage(); closeMenu(); const data=await fetchData();
   let html='<div class="intro-hero"><h1>Welcome to the Port of Business</h1><p>Explore Estonia’s startup ecosystem, pilot projects, grants, tax system and e-residency opportunities.</p></div>';
   html+='<div class="intro-section"><h2>Startups</h2><p class="muted">On the startup page you can find all major Estonian startups.</p><div class="carousel">';
-  data.startups.forEach(s=> html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`);
+ data.startups.forEach(s => html += startupCard(s));
+  
   html+='</div><button class="btn primary" onclick="loadStartups()">Go to Page</button></div>';
   html+='<div class="intro-section"><h2>Projects</h2><p class="muted">Find current pilot projects and collaboration opportunities in the Silicon Port ecosystem.</p><div class="carousel">';
   data.projects.forEach(p=> html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`);
@@ -389,7 +390,10 @@ async function loadInfoIntro(){
   document.getElementById('info-content').innerHTML=html;
 }
 
-async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; data.startups.forEach(s=>{ html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
+async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; 
+                              
+                              data.startups.forEach(s => html += startupCard(s));
+                              html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
 async function openStartup(id){
   showBusinessPage(); closeMenu();
   const data=await fetchData();

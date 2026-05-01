@@ -10,7 +10,8 @@
       "funding": "€2B+",
       "founders": "Markus Villig",
       "website": "https://bolt.eu",
-      "video": "https://youtu.be/rNSIwjmynYQ?is=eNZ5QitT1Iop5vjD"
+      "video": "https://youtu.be/rNSIwjmynYQ?is=eNZ5QitT1Iop5vjD",
+      "image": ""
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
       "funding": "€200M+",
       "founders": "Kaarel Kotkas",
       "website": "https://veriff.com",
-      "video": "https://youtu.be/Mxr5ca2bUvw?si=uCYp0vnXPowNBmbO"
+      "video": "https://youtu.be/Mxr5ca2bUvw?si=uCYp0vnXPowNBmbO",
+      "image": ""
     }
   ],
   "projects": [
@@ -33,7 +35,8 @@
       "status": "Recruiting",
       "organizer": "Silicon Port",
       "timeline": "2026 pilot phase",
-      "form": "https://forms.gle/"
+      "form": "https://forms.gle/",
+      "image": ""
     },
     {
       "id": 2,
@@ -42,7 +45,8 @@
       "status": "Open",
       "organizer": "Silicon Port",
       "timeline": "Prototype",
-      "form": "https://forms.gle/"
+      "form": "https://forms.gle/",
+      "image": ""
     }
   ],
   "grants": [
@@ -53,7 +57,8 @@
       "amount": "Depends on programme",
       "eligibility": "Early-stage companies and startup teams",
       "deadline": "Check official page",
-      "link": "https://eas.ee"
+      "link": "https://eas.ee",
+      "image": ""
     },
     {
       "id": 2,
@@ -62,7 +67,8 @@
       "amount": "Varies by call",
       "eligibility": "Companies, universities and consortiums",
       "deadline": "Depends on open call",
-      "link": "https://eas.ee"
+      "link": "https://eas.ee",
+      "image": ""
     }
   ],
   "tax": {
@@ -95,8 +101,8 @@
     ]
   },
   "news": [
-    {"id":1,"title":"Estonian Startup Ecosystem Update","summary":"Latest startup ecosystem updates, funding news and Silicon Port announcements.","article":"This article page can include the full summary of the news piece, key facts, startup names, funding numbers, and why it matters for Estonia.","source":"https://startupestonia.ee"},
-    {"id":2,"title":"New Pilot Projects Opening Soon","summary":"Silicon Port is preparing new pilot project opportunities for founders and builders.","article":"This article can explain which pilot projects are opening, who can join, what the timeline is, and how the ecosystem can participate.","source":"https://startupestonia.ee"}
+    {"id":1,"title":"Estonian Startup Ecosystem Update","summary":"Latest startup ecosystem updates, funding news and Silicon Port announcements.","article":"This article page can include the full summary of the news piece, key facts, startup names, funding numbers, and why it matters for Estonia.","source":"https://startupestonia.ee","image":""},
+    {"id":2,"title":"New Pilot Projects Opening Soon","summary":"Silicon Port is preparing new pilot project opportunities for founders and builders.","article":"This article can explain which pilot projects are opening, who can join, what the timeline is, and how the ecosystem can participate.","source":"https://startupestonia.ee","image":""}
   ],
   "information": {
     "stats": {"title":"Business Stats","content":"Key startup, investment, employment and company formation statistics for Estonia."},

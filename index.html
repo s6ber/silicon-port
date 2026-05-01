@@ -118,6 +118,8 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 .card { background:white; padding:20px; border-radius:12px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
 .card:hover { transform:translateY(-3px); transition:0.2s; }
 .section { margin-top:20px; background:white; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+.video-frame { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#111; }
+.video-frame iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px; }
 .btn { padding:10px 14px; border:none; border-radius:8px; cursor:pointer; margin-right:8px; }
 .primary { background:#0066ff; color:white; }
 .secondary { background:#eee; color:#111; }
@@ -231,6 +233,14 @@ async function fetchData(){
   siteData = await response.json();
   return siteData;
 }
+function getYouTubeEmbed(url){
+  if(!url) return '';
+  let videoId = '';
+  if(url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split('?')[0];
+  else if(url.includes('youtube.com/watch')) videoId = url.split('v=')[1]?.split('&')[0] || '';
+  else if(url.includes('youtube.com/embed/')) videoId = url.split('embed/')[1].split('?')[0];
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+}
 
 function showPage(id){
   document.getElementById('home').style.display='none';
@@ -247,7 +257,13 @@ function closeMenu(){ document.getElementById('menu').classList.remove('active')
 function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='block'; document.getElementById('topbar').style.display='none'; }
 
 async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; data.startups.forEach(s=>{ html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openStartup(id){ const data=await fetchData(); let s=data.startups.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button><div class="section"><h3>Overview</h3><p>${s.description}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`; }
+async function openStartup(id){
+  const data=await fetchData();
+  let s=data.startups.find(x=>x.id===id);
+  const embedUrl = getYouTubeEmbed(s.video);
+  const videoHTML = embedUrl ? `<div class="section"><h3>Video</h3><div class="video-frame"><iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>` : '';
+  document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button>${videoHTML}<div class="section"><h3>Overview</h3><p>${s.description}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`;
+}
 async function loadProjects(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Projects</h2><p class="muted">Current pilot projects. Click a project to see details and join.</p><div class="grid">'; data.projects.forEach(p=>{ html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
 async function openProject(id){ const data=await fetchData(); let p=data.projects.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${p.name}</h1><p>${p.description}</p><button class="btn primary" onclick="window.open('${p.form}', '_blank')">Join Project</button><button class="btn secondary" onclick="loadProjects()">Back</button><div class="section"><h3>Project Details</h3><p><strong>Status:</strong> ${p.status}</p><p><strong>Organizer:</strong> ${p.organizer}</p><p><strong>Timeline:</strong> ${p.timeline}</p></div>`; }
 async function loadGrants(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Grants</h2><p class="muted">Browse grants and open each grant page for eligibility, amount and links.</p><div class="grid">'; data.grants.forEach(g=>{ html+=`<div class="card" onclick="openGrant(${g.id})"><h3>${g.name}</h3><p>${g.description}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }

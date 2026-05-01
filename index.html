@@ -5,23 +5,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Silicon Port</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111; }
-.homepage { background:url('file_0000000001787246833b6198b7d40451.png') center/cover; height:100vh; display:flex; justify-content:space-between; align-items:center; padding:5%; }
-.hero-btn { padding:20px 40px; font-size:22px; background:rgba(0,0,0,0.6); color:white; border:none; border-radius:12px; cursor:pointer; backdrop-filter:blur(8px); }
+
+/* HOMEPAGE */
+.homepage {
+  background:url('file_0000000001787246833b6198b7d40451.png') center/cover;
+  height:100vh;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:5%;
+}
+.hero-btn {
+  padding:20px 40px;
+  font-size:22px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  backdrop-filter: blur(8px);
+}
 .hero-btn:hover { background:white; color:#111; }
-.topbar { display:none; justify-content:space-between; align-items:center; padding:15px 30px; background:white; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+
+/* TOPBAR */
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
 .logo { font-weight:700; cursor:pointer; }
-.menu { position:absolute; top:60px; left:30px; background:white; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); width:260px; display:none; z-index:100; overflow:hidden; }
+
+/* DROPDOWN MENU */
+.menu {
+  position:absolute;
+  top:60px;
+  left:30px;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  width:260px;
+  display:none;
+  z-index:100;
+  overflow:hidden;
+}
 .menu.active { display:block; }
 .menu-item { padding:12px 15px; cursor:pointer; border-bottom:1px solid #eee; font-weight:600; }
 .menu-item:hover { background:#f0f0f0; }
 .submenu { display:none; padding-left:15px; background:#fafafa; }
 .submenu div { padding:10px; cursor:pointer; }
 .submenu div:hover { background:#eee; }
-.nav { display:flex; gap:10px; background:#111; padding:10px; flex-wrap:wrap; }
-.nav button { color:white; background:none; border:1px solid white; padding:8px 12px; cursor:pointer; border-radius:6px; }
+.arrow { float:right; }
+
+/* NAV BARS */
+.nav {
+  display:flex;
+  gap:10px;
+  background:#111;
+  padding:10px;
+  flex-wrap:wrap;
+}
+.nav button {
+  color:white;
+  background:none;
+  border:1px solid white;
+  padding:8px 12px;
+  cursor:pointer;
+  border-radius:6px;
+}
 .nav button:hover { background:white; color:#111; }
+
 .page { display:none; }
 .active { display:block; }
 .main { padding:30px; }
@@ -33,48 +91,299 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 .primary { background:#0066ff; color:white; }
 .secondary { background:#eee; color:#111; }
 .muted { color:#666; }
-@media (max-width:700px){ .homepage{padding:8%;} .hero-btn{font-size:18px; padding:16px 24px;} .main{padding:18px;} }
 </style>
 </head>
 <body>
+
+<!-- HOMEPAGE -->
 <div class="homepage" id="home">
-  <button class="hero-btn" onclick="loadInfo('news')">Information</button>
-  <button class="hero-btn" onclick="loadStartups()">Business</button>
+  <button class="hero-btn" onclick="showPage('information')">Information</button>
+  <button class="hero-btn" onclick="showPage('business')">Business</button>
 </div>
-<div class="topbar" id="topbar"><div class="logo" onclick="toggleMenu()">Silicon Port</div></div>
+
+<!-- TOPBAR -->
+<div class="topbar" id="topbar" style="display:none;">
+  <div class="logo" onclick="toggleMenu()">Silicon Port</div>
+</div>
+
+<!-- DROPDOWN MENU -->
 <div class="menu" id="menu">
   <div class="menu-item" onclick="goHome()">Home</div>
-  <div class="menu-item" onclick="toggleSubmenu('business-sub')">Business ▼</div>
+
+  <div class="menu-item" onclick="toggleSubmenu('business-sub')">Business <span class="arrow">▼</span></div>
   <div class="submenu" id="business-sub">
-    <div onclick="loadStartups()">Startups</div><div onclick="loadProjects()">Projects</div><div onclick="loadGrants()">Grants</div><div onclick="loadTax()">Tax System 101</div><div onclick="loadEResidency()">E-Residency</div>
+    <div onclick="loadStartups()">Startups</div>
+    <div onclick="loadProjects()">Projects</div>
+    <div onclick="loadGrants()">Grants</div>
+    <div onclick="loadTax()">Tax System 101</div>
+    <div onclick="loadEResidency()">E-Residency</div>
   </div>
-  <div class="menu-item" onclick="toggleSubmenu('info-sub')">Information ▼</div>
+
+  <div class="menu-item" onclick="toggleSubmenu('info-sub')">Information <span class="arrow">▼</span></div>
   <div class="submenu" id="info-sub">
-    <div onclick="loadInfo('news')">News</div><div onclick="loadInfo('stats')">Business Stats</div><div onclick="loadInfo('history')">History</div><div onclick="loadInfo('about')">About Us</div><div onclick="loadInfo('contact')">Contact</div>
+    <div onclick="loadInfo('news')">News</div>
+    <div onclick="loadInfo('stats')">Business Stats</div>
+    <div onclick="loadInfo('history')">History</div>
+    <div onclick="loadInfo('about')">About Us</div>
+    <div onclick="loadInfo('contact')">Contact</div>
   </div>
 </div>
-<div class="page" id="information"><div class="nav"><button onclick="loadInfo('news')">News</button><button onclick="loadInfo('stats')">Business Stats</button><button onclick="loadInfo('history')">History</button><button onclick="loadInfo('about')">About Us</button><button onclick="loadInfo('contact')">Contact</button></div><div class="main" id="info-content"></div></div>
-<div class="page" id="business"><div class="nav"><button onclick="loadStartups()">Startups</button><button onclick="loadProjects()">Projects</button><button onclick="loadGrants()">Grants</button><button onclick="loadTax()">Tax System 101</button><button onclick="loadEResidency()">E-Residency</button></div><div class="main" id="biz-content"></div></div>
+
+<!-- INFORMATION PAGE -->
+<div class="page" id="information">
+  <div class="nav">
+    <button onclick="loadInfo('news')">News</button>
+    <button onclick="loadInfo('stats')">Business Stats</button>
+    <button onclick="loadInfo('history')">History</button>
+    <button onclick="loadInfo('about')">About Us</button>
+    <button onclick="loadInfo('contact')">Contact</button>
+  </div>
+  <div class="main" id="info-content"></div>
+</div>
+
+<!-- BUSINESS PAGE -->
+<div class="page" id="business">
+  <div class="nav">
+    <button onclick="loadStartups()">Startups</button>
+    <button onclick="loadProjects()">Projects</button>
+    <button onclick="loadGrants()">Grants</button>
+    <button onclick="loadTax()">Tax System 101</button>
+    <button onclick="loadEResidency()">E-Residency</button>
+  </div>
+  <div class="main" id="biz-content"></div>
+</div>
+
 <script>
-let siteData=null;
-async function fetchData(){ if(siteData) return siteData; const r=await fetch('data.json'); siteData=await r.json(); return siteData; }
-function showPage(id){ document.getElementById('home').style.display='none'; document.getElementById('topbar').style.display='flex'; document.getElementById('information').classList.remove('active'); document.getElementById('business').classList.remove('active'); document.getElementById(id).classList.add('active'); }
-function showBusinessPage(){ showPage('business'); }
-function showInformationPage(){ showPage('information'); }
-function toggleMenu(){ document.getElementById('menu').classList.toggle('active'); }
-function toggleSubmenu(id){ const el=document.getElementById(id); el.style.display=el.style.display==='block'?'none':'block'; }
-function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
-function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='flex'; document.getElementById('topbar').style.display='none'; }
-async function loadStartups(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; data.startups.forEach(s=>html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openStartup(id){ const data=await fetchData(); const s=data.startups.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}','_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button><div class="section"><h3>Overview</h3><p>${s.description}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`; }
-async function loadProjects(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Projects</h2><p class="muted">Current pilot projects. Click a project to see details and join.</p><div class="grid">'; data.projects.forEach(p=>html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openProject(id){ const data=await fetchData(); const p=data.projects.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${p.name}</h1><p>${p.description}</p><button class="btn primary" onclick="window.open('${p.form}','_blank')">Join Project</button><button class="btn secondary" onclick="loadProjects()">Back</button><div class="section"><h3>Project Details</h3><p><strong>Status:</strong> ${p.status}</p><p><strong>Organizer:</strong> ${p.organizer}</p><p><strong>Timeline:</strong> ${p.timeline}</p></div>`; }
-async function loadGrants(){ showBusinessPage(); closeMenu(); const data=await fetchData(); let html='<h2>Grants</h2><p class="muted">Browse grants and open each grant page for eligibility, amount and links.</p><div class="grid">'; data.grants.forEach(g=>html+=`<div class="card" onclick="openGrant(${g.id})"><h3>${g.name}</h3><p>${g.description}</p></div>`); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function openGrant(id){ const data=await fetchData(); const g=data.grants.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${g.name}</h1><p>${g.description}</p><button class="btn primary" onclick="window.open('${g.link}','_blank')">More Details</button><button class="btn secondary" onclick="loadGrants()">Back</button><div class="section"><h3>Grant Details</h3><p><strong>Amount:</strong> ${g.amount}</p><p><strong>Eligibility:</strong> ${g.eligibility}</p><p><strong>Deadline:</strong> ${g.deadline}</p></div>`; }
-async function loadTax(){ showBusinessPage(); closeMenu(); const data=await fetchData(); const t=data.tax; let html=`<h1>${t.title}</h1>`; t.intro.forEach(p=>html+=`<p class="muted">${p}</p>`); t.sections.forEach(sec=>{ html+=`<div class="section"><h3>${sec.heading}</h3>`; sec.items.forEach(i=>html+=`<p>${i}</p>`); html+='</div>'; }); html+='<div class="section"><h3>Useful Links</h3>'; t.links.forEach(l=>html+=`<button class="btn primary" onclick="window.open('${l.url}','_blank')">${l.label}</button>`); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-async function loadEResidency(){ showBusinessPage(); closeMenu(); const data=await fetchData(); const e=data.eresidency; let html=`<h1>${e.title}</h1><p class="muted">${e.intro}</p>`; e.sections.forEach(sec=>{ html+=`<div class="section"><h3>${sec.heading}</h3>`; sec.items.forEach(i=>html+=`<p>${i}</p>`); if(sec.button) html+=`<button class="btn primary" onclick="window.open('${sec.button.url}','_blank')">${sec.button.label}</button>`; html+='</div>'; }); document.getElementById('biz-content').innerHTML=html; }
-async function loadInfo(type){ showInformationPage(); closeMenu(); const data=await fetchData(); if(type==='news'){ let html='<h1>News</h1><p class="muted">Browse startup ecosystem news and open each article for full details.</p><div class="grid">'; data.news.forEach(n=>html+=`<div class="card" onclick="openNews(${n.id})"><h3>${n.title}</h3><p>${n.summary}</p></div>`); html+='</div>'; document.getElementById('info-content').innerHTML=html; return; } const info=data.information[type]; document.getElementById('info-content').innerHTML=`<h1>${info.title}</h1><div class="section"><p>${info.content}</p></div>`; }
-async function openNews(id){ const data=await fetchData(); const n=data.news.find(x=>x.id===id); document.getElementById('info-content').innerHTML=`<h1>${n.title}</h1><p>${n.summary}</p><button class="btn primary" onclick="window.open('${n.source}','_blank')">Original News Piece</button><button class="btn secondary" onclick="loadInfo('news')">Back</button><div class="section"><h3>Article</h3><p>${n.article}</p></div>`; }
+let siteData = null;
+async function fetchData(){
+  if(siteData) return siteData;
+  const response = await fetch('data.json');
+  siteData = await response.json();
+  return siteData;
+}
+
+function showPage(id){
+  document.getElementById('home').style.display='none';
+  document.getElementById('topbar').style.display='flex';
+  document.getElementById('information').classList.remove('active');
+  document.getElementById('business').classList.remove('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function showBusinessPage(){
+  showPage('business');
+}
+
+function showInformationPage(){
+  showPage('information');
+}
+
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('active');
+}
+
+function toggleSubmenu(id){
+  let el=document.getElementById(id);
+  el.style.display = el.style.display==='block' ? 'none' : 'block';
+}
+
+function closeMenu(){
+  document.getElementById('menu').classList.remove('active');
+}
+
+function goHome(){
+  closeMenu();
+  document.getElementById('business').classList.remove('active');
+  document.getElementById('information').classList.remove('active');
+  document.getElementById('home').style.display='flex';
+  document.getElementById('topbar').style.display='none';
+}
+
+/* -------- STARTUPS -------- */
+async function loadStartups(){
+  showBusinessPage();
+  closeMenu();
+  const data = await fetchData();
+  let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">';
+  data.startups.forEach(s=>{
+    html+=`
+      <div class="card" onclick="openStartup(${s.id})">
+        <h3>${s.name}</h3>
+        <p>${s.tagline}</p>
+        <p class="muted">${s.industry}</p>
+      </div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function openStartup(id){
+  const data = await fetchData();
+  let s=data.startups.find(x=>x.id===id);
+  document.getElementById('biz-content').innerHTML=`
+    <h1>${s.name}</h1>
+    <p>${s.tagline}</p>
+    <button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button>
+    <button class="btn secondary" onclick="loadStartups()">Back</button>
+    <div class="section"><h3>Overview</h3><p>${s.description}</p></div>
+    <div class="section">
+      <h3>Company Details</h3>
+      <p><strong>Industry:</strong> ${s.industry}</p>
+      <p><strong>Founded:</strong> ${s.founded}</p>
+      <p><strong>Funding:</strong> ${s.funding}</p>
+      <p><strong>Founders:</strong> ${s.founders}</p>
+    </div>`;
+}
+
+/* -------- PROJECTS -------- */
+async function loadProjects(){
+  showBusinessPage();
+  closeMenu();
+  const data = await fetchData();
+  let html='<h2>Projects</h2><p class="muted">Current pilot projects. Click a project to see details and join.</p><div class="grid">';
+  data.projects.forEach(p=>{
+    html+=`
+      <div class="card" onclick="openProject(${p.id})">
+        <h3>${p.name}</h3>
+        <p>${p.status}</p>
+        <p class="muted">${p.timeline}</p>
+      </div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function openProject(id){
+  const data = await fetchData();
+  let p=data.projects.find(x=>x.id===id);
+  document.getElementById('biz-content').innerHTML=`
+    <h1>${p.name}</h1>
+    <p>${p.description}</p>
+    <button class="btn primary" onclick="window.open('${p.form}', '_blank')">Join Project</button>
+    <button class="btn secondary" onclick="loadProjects()">Back</button>
+    <div class="section">
+      <h3>Project Details</h3>
+      <p><strong>Status:</strong> ${p.status}</p>
+      <p><strong>Organizer:</strong> ${p.organizer}</p>
+      <p><strong>Timeline:</strong> ${p.timeline}</p>
+    </div>`;
+}
+
+/* -------- GRANTS -------- */
+async function loadGrants(){
+  showBusinessPage();
+  closeMenu();
+  const data = await fetchData();
+  let html='<h2>Grants</h2><p class="muted">Browse grants and open each grant page for eligibility, amount and links.</p><div class="grid">';
+  data.grants.forEach(g=>{
+    html+=`
+      <div class="card" onclick="openGrant(${g.id})">
+        <h3>${g.name}</h3>
+        <p>${g.description}</p>
+      </div>`;
+  });
+  html+='</div>';
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+async function openGrant(id){
+  const data = await fetchData();
+  let g=data.grants.find(x=>x.id===id);
+  document.getElementById('biz-content').innerHTML=`
+    <h1>${g.name}</h1>
+    <p>${g.description}</p>
+    <button class="btn primary" onclick="window.open('${g.link}', '_blank')">More Details</button>
+    <button class="btn secondary" onclick="loadGrants()">Back</button>
+    <div class="section">
+      <h3>Grant Details</h3>
+      <p><strong>Amount:</strong> ${g.amount}</p>
+      <p><strong>Eligibility:</strong> ${g.eligibility}</p>
+      <p><strong>Deadline:</strong> ${g.deadline}</p>
+    </div>`;
+}
+
+/* -------- TAX SYSTEM -------- */
+async function loadTax(){
+  showBusinessPage();
+  closeMenu();
+  const data = await fetchData();
+  const t = data.tax;
+  let html = `<h1>${t.title}</h1>`;
+  t.intro.forEach(p=> html += `<p class="muted">${p}</p>`);
+  t.sections.forEach(sec=>{
+    html += `<div class="section"><h3>${sec.heading}</h3>`;
+    sec.items.forEach(item=> html += `<p>${item}</p>`);
+    html += `</div>`;
+  });
+  html += `<div class="section"><h3>Useful Links</h3>`;
+  t.links.forEach(link=>{
+    html += `<button class="btn primary" onclick="window.open('${link.url}', '_blank')">${link.label}</button>`;
+  });
+  html += `</div>`;
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+/* -------- E-RESIDENCY -------- */
+async function loadEResidency(){
+  showBusinessPage();
+  closeMenu();
+  const data = await fetchData();
+  const e = data.eresidency;
+  let html=`<h1>${e.title}</h1><p class="muted">${e.intro}</p>`;
+  e.sections.forEach(sec=>{
+    html+=`<div class="section"><h3>${sec.heading}</h3>`;
+    sec.items.forEach(item=> html+=`<p>${item}</p>`);
+    if(sec.button){
+      html+=`<button class="btn primary" onclick="window.open('${sec.button.url}', '_blank')">${sec.button.label}</button>`;
+    }
+    html+=`</div>`;
+  });
+  document.getElementById('biz-content').innerHTML=html;
+}
+
+/* -------- INFORMATION -------- */
+async function loadNews(){
+  showInformationPage();
+  closeMenu();
+  const data = await fetchData();
+  let html='<h1>News</h1><p class="muted">Browse startup ecosystem news and open each article for full details.</p><div class="grid">';
+  data.news.forEach(n=>{
+    html+=`
+      <div class="card" onclick="openNews(${n.id})">
+        <h3>${n.title}</h3>
+        <p>${n.summary}</p>
+      </div>`;
+  });
+  html+='</div>';
+  document.getElementById('info-content').innerHTML=html;
+}
+
+async function openNews(id){
+  const data = await fetchData();
+  let n=data.news.find(x=>x.id===id);
+  document.getElementById('info-content').innerHTML=`
+    <h1>${n.title}</h1>
+    <p>${n.summary}</p>
+    <button class="btn primary" onclick="window.open('${n.source}', '_blank')">Original News Piece</button>
+    <button class="btn secondary" onclick="loadNews()">Back</button>
+    <div class="section">
+      <h3>Article</h3>
+      <p>${n.article}</p>
+    </div>`;
+}
+
+async function loadInfo(type){
+  showInformationPage();
+  closeMenu();
+  const data = await fetchData();
+  let html='';
+  if(type==='news') return loadNews();
+  const info = data.information[type];
+  html=`<h1>${info.title}</h1><div class="section"><p>${info.content}</p></div>`;
+  document.getElementById('info-content').innerHTML=html;
+}
+
 </script>
+
 </body>
 </html>

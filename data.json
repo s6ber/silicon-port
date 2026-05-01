@@ -2,7 +2,7 @@
   "startups": [
     {
       "id": 1,
-      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style>Bolt",
+      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style><div class=\"card-img\" style=\"background-image:url('images/images (9).png')\"></div>Bolt",
       "tagline": "Mobility super app",
       "description": "Estonian mobility company offering ride-hailing, scooters, car sharing and food delivery.",
       "industry": "Mobility",
@@ -15,7 +15,7 @@
     },
     {
       "id": 2,
-      "name": "Veriff",
+      "name": "<div class=\"card-img\" style=\"background-image:url('images/images (9).png')\"></div>Veriff",
       "tagline": "Identity verification platform",
       "description": "AI-powered identity verification company helping businesses verify users online.",
       "industry": "Fintech / Identity",
@@ -30,45 +30,45 @@
   "projects": [
     {
       "id": 1,
-      "name": "Smart Port Logistics",
+      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style><div class=\"card-img\" style=\"background-image:url('images/projects/project-1.png'),url('images/images (9).png')\"></div>Smart Port Logistics",
       "description": "Pilot project for testing AI and automation in port logistics, cargo routing and startup collaboration.",
       "status": "Recruiting",
       "organizer": "Silicon Port",
       "timeline": "2026 pilot phase",
       "form": "https://forms.gle/",
-      "image": ""
+      "image": "images/projects/project-1.png"
     },
     {
       "id": 2,
-      "name": "Tallinn Startup Map",
+      "name": "<div class=\"card-img\" style=\"background-image:url('images/projects/project-2.png'),url('images/images (9).png')\"></div>Tallinn Startup Map",
       "description": "A public map of Estonian startups, grants, investors and pilot opportunities.",
       "status": "Open",
       "organizer": "Silicon Port",
       "timeline": "Prototype",
       "form": "https://forms.gle/",
-      "image": ""
+      "image": "images/projects/project-2.png"
     }
   ],
   "grants": [
     {
       "id": 1,
-      "name": "Startup Grant",
+      "name": "<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style><div class=\"card-img\" style=\"background-image:url('images/grants/grant-1.png'),url('images/images (9).png')\"></div>Startup Grant",
       "description": "Funding support for early-stage companies and founders building scalable businesses.",
       "amount": "Depends on programme",
       "eligibility": "Early-stage companies and startup teams",
       "deadline": "Check official page",
       "link": "https://eas.ee",
-      "image": ""
+      "image": "images/grants/grant-1.png"
     },
     {
       "id": 2,
-      "name": "EU Innovation Funding",
+      "name": "<div class=\"card-img\" style=\"background-image:url('images/grants/grant-2.png'),url('images/images (9).png')\"></div>EU Innovation Funding",
       "description": "European innovation funding opportunities for technology, research and growth projects.",
       "amount": "Varies by call",
       "eligibility": "Companies, universities and consortiums",
       "deadline": "Depends on open call",
       "link": "https://eas.ee",
-      "image": ""
+      "image": "images/grants/grant-2.png"
     }
   ],
   "tax": {
@@ -101,8 +101,8 @@
     ]
   },
   "news": [
-    {"id":1,"title":"Estonian Startup Ecosystem Update","summary":"Latest startup ecosystem updates, funding news and Silicon Port announcements.","article":"This article page can include the full summary of the news piece, key facts, startup names, funding numbers, and why it matters for Estonia.","source":"https://startupestonia.ee","image":""},
-    {"id":2,"title":"New Pilot Projects Opening Soon","summary":"Silicon Port is preparing new pilot project opportunities for founders and builders.","article":"This article can explain which pilot projects are opening, who can join, what the timeline is, and how the ecosystem can participate.","source":"https://startupestonia.ee","image":""}
+    {"id":1,"title":"<style>.card-img{display:block!important;width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-26px -26px 22px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-radius:26px 26px 0 0!important;background-color:#dbeafe!important}.carousel .card-img{width:calc(100% + 52px)!important;aspect-ratio:1/1!important;height:auto!important}@media(max-width:640px){.card-img{width:calc(100% + 44px)!important;aspect-ratio:1/1!important;height:auto!important;margin:-22px -22px 20px!important;border-radius:22px 22px 0 0!important}}</style><div class=\"card-img\" style=\"background-image:url('images/news/news-1.png'),url('images/images (9).png')\"></div>Estonian Startup Ecosystem Update","summary":"Latest startup ecosystem updates, funding news and Silicon Port announcements.","article":"This article page can include the full summary of the news piece, key facts, startup names, funding numbers, and why it matters for Estonia.","source":"https://startupestonia.ee","image":"images/news/news-1.png"},
+    {"id":2,"title":"<div class=\"card-img\" style=\"background-image:url('images/news/news-2.png'),url('images/images (9).png')\"></div>New Pilot Projects Opening Soon","summary":"Silicon Port is preparing new pilot project opportunities for founders and builders.","article":"This article can explain which pilot projects are opening, who can join, what the timeline is, and how the ecosystem can participate.","source":"https://startupestonia.ee","image":"images/news/news-2.png"}
   ],
   "information": {
     "stats": {"title":"Business Stats","content":"Key startup, investment, employment and company formation statistics for Estonia."},

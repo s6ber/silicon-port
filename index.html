@@ -25,15 +25,17 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
 .homepage { min-height:100vh; background:#111; }
 .home-hero {
   position:relative;
+  width:100%;
   height:auto;
   min-height:0;
-  aspect-ratio: 1536 / 1024;
-  background:#111 url('file_0000000001787246833b6198b7d40451~2.png') center center/contain no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  line-height:0;
+  background:#111;
   overflow:hidden;
+}
+.hero-img {
+  display:block;
+  width:100%;
+  height:auto;
 }
 .hero-copy {
   position:absolute;
@@ -46,6 +48,7 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
   letter-spacing:0.03em;
   text-shadow:0 2px 18px rgba(0,0,0,0.8);
   max-width:75%;
+  line-height:1.2;
 }
 .hero-copy h1 {
   margin:0 0 6px;
@@ -143,6 +146,7 @@ body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111
     <div class="logo" onclick="toggleMenu()">Silicon Port</div>
   </div>
   <div class="home-hero">
+    <img class="hero-img" src="file_0000000001787246833b6198b7d40451~2.png" alt="Tallinn skyline with circuit board sailing boats">
     <button class="hero-icon left" onclick="showPage('information')" aria-label="Information"><i class="fa-solid fa-arrow-left"></i></button>
     <div class="hero-copy">
       <h1>Silicon Port</h1>

@@ -1,122 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silicon Port</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+// shortened for update
+function loadTax(){
+  showBusinessPage();
+  closeMenu();
 
-<style>
-body { margin:0; font-family:'Inter', sans-serif; background:#f6f8fb; color:#111; }
-.homepage { background:url('file_0000000001787246833b6198b7d40451.png') center/cover; height:100vh; display:flex; justify-content:space-between; align-items:center; padding:5%; }
-.hero-btn { padding:20px 40px; font-size:22px; background:rgba(0,0,0,0.6); color:white; border:none; border-radius:12px; cursor:pointer; backdrop-filter: blur(8px); }
-.hero-btn:hover { background:white; color:#111; }
-.topbar { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:white; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-.logo { font-weight:700; cursor:pointer; }
-.menu { position:absolute; top:60px; left:30px; background:white; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); width:260px; display:none; z-index:100; overflow:hidden; }
-.menu.active { display:block; }
-.menu-item { padding:12px 15px; cursor:pointer; border-bottom:1px solid #eee; font-weight:600; }
-.menu-item:hover { background:#f0f0f0; }
-.submenu { display:none; padding-left:15px; background:#fafafa; }
-.submenu div { padding:10px; cursor:pointer; }
-.submenu div:hover { background:#eee; }
-.nav { display:flex; gap:10px; background:#111; padding:10px; flex-wrap:wrap; }
-.nav button { color:white; background:none; border:1px solid white; padding:8px 12px; cursor:pointer; border-radius:6px; }
-.nav button:hover { background:white; color:#111; }
-.page { display:none; }
-.active { display:block; }
-.main { padding:30px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
-.card { background:white; padding:20px; border-radius:12px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
-.card:hover { transform:translateY(-3px); transition:0.2s; }
-.section { margin-top:20px; background:white; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
-.btn { padding:10px 14px; border:none; border-radius:8px; cursor:pointer; margin-right:8px; }
-.primary { background:#0066ff; color:white; }
-.secondary { background:#eee; color:#111; }
-.muted { color:#666; }
-</style>
-</head>
-<body>
+  fetch('tax.json')
+    .then(res => res.json())
+    .then(data => {
+      let html = `<h1>${data.title}</h1>`;
+      data.intro.forEach(p => html += `<p class="muted">${p}</p>`);
 
-<div class="homepage" id="home">
-  <button class="hero-btn" onclick="showPage('information')">Information</button>
-  <button class="hero-btn" onclick="showPage('business')">Business</button>
-</div>
+      data.sections.forEach(sec => {
+        html += `<div class="section"><h3>${sec.heading}</h3>`;
+        sec.items.forEach(item => {
+          html += `<p>${item}</p>`;
+        });
+        html += `</div>`;
+      });
 
-<div class="topbar" id="topbar" style="display:none;">
-  <div class="logo" onclick="toggleMenu()">Silicon Port</div>
-</div>
+      html += `<div class="section"><h3>Useful Links</h3>`;
+      data.links.forEach(link => {
+        html += `<button class="btn primary" onclick="window.open('${link.url}', '_blank')">${link.label}</button>`;
+      });
+      html += `</div>`;
 
-<div class="menu" id="menu">
-  <div class="menu-item" onclick="goHome()">Home</div>
-  <div class="menu-item" onclick="toggleSubmenu('business-sub')">Business ▼</div>
-  <div class="submenu" id="business-sub">
-    <div onclick="loadStartups()">Startups</div>
-    <div onclick="loadProjects()">Projects</div>
-    <div onclick="loadGrants()">Grants</div>
-    <div onclick="loadTax()">Tax System 101</div>
-    <div onclick="loadEResidency()">E-Residency</div>
-  </div>
-  <div class="menu-item" onclick="toggleSubmenu('info-sub')">Information ▼</div>
-  <div class="submenu" id="info-sub">
-    <div onclick="loadInfo('news')">News</div>
-    <div onclick="loadInfo('stats')">Business Stats</div>
-    <div onclick="loadInfo('history')">History</div>
-    <div onclick="loadInfo('about')">About Us</div>
-    <div onclick="loadInfo('contact')">Contact</div>
-  </div>
-</div>
-
-<div class="page" id="information">
-  <div class="nav">
-    <button onclick="loadInfo('news')">News</button>
-    <button onclick="loadInfo('stats')">Business Stats</button>
-    <button onclick="loadInfo('history')">History</button>
-    <button onclick="loadInfo('about')">About Us</button>
-    <button onclick="loadInfo('contact')">Contact</button>
-  </div>
-  <div class="main" id="info-content"></div>
-</div>
-
-<div class="page" id="business">
-  <div class="nav">
-    <button onclick="loadStartups()">Startups</button>
-    <button onclick="loadProjects()">Projects</button>
-    <button onclick="loadGrants()">Grants</button>
-    <button onclick="loadTax()">Tax System 101</button>
-    <button onclick="loadEResidency()">E-Residency</button>
-  </div>
-  <div class="main" id="biz-content"></div>
-</div>
-
-<script>
-function showPage(id){ document.getElementById('home').style.display='none'; document.getElementById('topbar').style.display='flex'; document.getElementById('information').classList.remove('active'); document.getElementById('business').classList.remove('active'); document.getElementById(id).classList.add('active'); }
-function showBusinessPage(){ showPage('business'); }
-function showInformationPage(){ showPage('information'); }
-function toggleMenu(){ document.getElementById('menu').classList.toggle('active'); }
-function toggleSubmenu(id){ let el=document.getElementById(id); el.style.display = el.style.display==='block' ? 'none' : 'block'; }
-function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
-function goHome(){ closeMenu(); document.getElementById('business').classList.remove('active'); document.getElementById('information').classList.remove('active'); document.getElementById('home').style.display='flex'; document.getElementById('topbar').style.display='none'; }
-
-const startups=[{id:1,name:'Bolt',tagline:'Mobility super app',desc:'Estonian mobility company offering ride-hailing, scooters, car sharing and food delivery.',industry:'Mobility',founded:'2013',funding:'€2B+',founders:'Markus Villig',website:'https://bolt.eu'},{id:2,name:'Veriff',tagline:'Identity verification platform',desc:'AI-powered identity verification company helping businesses verify users online.',industry:'Fintech / Identity',founded:'2015',funding:'€200M+',founders:'Kaarel Kotkas',website:'https://veriff.com'}];
-function loadStartups(){ showBusinessPage(); closeMenu(); let html='<h2>Startups</h2><p class="muted">Browse Estonian startups and open full company profiles.</p><div class="grid">'; startups.forEach(s=>{ html+=`<div class="card" onclick="openStartup(${s.id})"><h3>${s.name}</h3><p>${s.tagline}</p><p class="muted">${s.industry}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-function openStartup(id){ let s=startups.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${s.name}</h1><p>${s.tagline}</p><button class="btn primary" onclick="window.open('${s.website}', '_blank')">Website</button><button class="btn secondary" onclick="loadStartups()">Back</button><div class="section"><h3>Overview</h3><p>${s.desc}</p></div><div class="section"><h3>Company Details</h3><p><strong>Industry:</strong> ${s.industry}</p><p><strong>Founded:</strong> ${s.founded}</p><p><strong>Funding:</strong> ${s.funding}</p><p><strong>Founders:</strong> ${s.founders}</p></div>`; }
-
-const projects=[{id:1,name:'Smart Port Logistics',desc:'Pilot project for testing AI and automation in port logistics, cargo routing and startup collaboration.',status:'Recruiting',organizer:'Silicon Port',timeline:'2026 pilot phase',form:'https://forms.gle/'},{id:2,name:'Tallinn Startup Map',desc:'A public map of Estonian startups, grants, investors and pilot opportunities.',status:'Open',organizer:'Silicon Port',timeline:'Prototype',form:'https://forms.gle/'}];
-function loadProjects(){ showBusinessPage(); closeMenu(); let html='<h2>Projects</h2><p class="muted">Current pilot projects. Click a project to see details and join.</p><div class="grid">'; projects.forEach(p=>{ html+=`<div class="card" onclick="openProject(${p.id})"><h3>${p.name}</h3><p>${p.status}</p><p class="muted">${p.timeline}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-function openProject(id){ let p=projects.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${p.name}</h1><p>${p.desc}</p><button class="btn primary" onclick="window.open('${p.form}', '_blank')">Join Project</button><button class="btn secondary" onclick="loadProjects()">Back</button><div class="section"><h3>Project Details</h3><p><strong>Status:</strong> ${p.status}</p><p><strong>Organizer:</strong> ${p.organizer}</p><p><strong>Timeline:</strong> ${p.timeline}</p></div>`; }
-
-const grants=[{id:1,name:'Startup Grant',desc:'Funding support for early-stage companies and founders building scalable businesses.',amount:'Depends on programme',eligibility:'Early-stage companies and startup teams',deadline:'Check official page',link:'https://eas.ee'},{id:2,name:'EU Innovation Funding',desc:'European innovation funding opportunities for technology, research and growth projects.',amount:'Varies by call',eligibility:'Companies, universities and consortiums',deadline:'Depends on open call',link:'https://eas.ee'}];
-function loadGrants(){ showBusinessPage(); closeMenu(); let html='<h2>Grants</h2><p class="muted">Browse grants and open each grant page for eligibility, amount and links.</p><div class="grid">'; grants.forEach(g=>{ html+=`<div class="card" onclick="openGrant(${g.id})"><h3>${g.name}</h3><p>${g.desc}</p></div>`; }); html+='</div>'; document.getElementById('biz-content').innerHTML=html; }
-function openGrant(id){ let g=grants.find(x=>x.id===id); document.getElementById('biz-content').innerHTML=`<h1>${g.name}</h1><p>${g.desc}</p><button class="btn primary" onclick="window.open('${g.link}', '_blank')">More Details</button><button class="btn secondary" onclick="loadGrants()">Back</button><div class="section"><h3>Grant Details</h3><p><strong>Amount:</strong> ${g.amount}</p><p><strong>Eligibility:</strong> ${g.eligibility}</p><p><strong>Deadline:</strong> ${g.deadline}</p></div>`; }
-
-function loadTax(){ showBusinessPage(); closeMenu(); document.getElementById('biz-content').innerHTML=`<h1>🇪🇪 Tax System 101 — Estonia (Startup Guide)</h1><p class="muted">Estonia is widely considered one of the most startup-friendly tax systems in the world, mainly because profits are not taxed until they are distributed.</p><p>This allows companies to reinvest and scale faster without immediate tax pressure.</p><div class="section"><h3>🏢 1. Corporate Income Tax</h3><p><strong>0%</strong> on retained and reinvested profits</p><p><strong>20%</strong> on distributed profits (dividends)</p><p><strong>Example:</strong> If your startup earns €100,000 and reinvests it → €0 tax. If you distribute €100,000 → €20,000 tax.</p><p><strong>Key advantage:</strong> You only pay tax when taking money out of the company.</p></div><div class="section"><h3>👨‍💼 2. Salary & Payroll Taxes</h3><p><strong>Employer pays:</strong></p><p>Social Tax: 33% — 20% pension and 13% healthcare</p><p><strong>Employee pays:</strong></p><p>Income Tax: 20% flat rate</p><p>Unemployment Insurance: 1.6%</p><p><strong>Employer additional:</strong> Unemployment Insurance: 0.8%</p></div><div class="section"><h3>💰 Minimum Salary (2026)</h3><p>~€820/month gross (approx., updated yearly)</p></div><div class="section"><h3>📌 Example Salary Breakdown</h3><p>If gross salary = €2,000:</p><p>Employer total cost ≈ €2,660</p><p>Employee receives ≈ €1,550 net</p></div><div class="section"><h3>🧾 3. Value Added Tax (VAT)</h3><p><strong>Standard rate:</strong> 22%</p><p><strong>Reduced rates:</strong> 9% for books and accommodation</p><p><strong>0%:</strong> exports</p><p><strong>VAT Registration Threshold:</strong> €40,000 annual turnover</p></div><div class="section"><h3>📈 4. Dividends & Capital Gains</h3><p><strong>Dividends:</strong> taxed at 20% at corporate level</p><p>No additional tax for individuals if already taxed</p><p><strong>Capital Gains (individual):</strong> 20% income tax</p></div><div class="section"><h3>🏠 5. Land Tax (Real Estate)</h3><p>0.1% – 2.5% of land value annually</p><p>Set by local municipalities</p><p><strong>Important:</strong> No property tax on buildings. Only land is taxed.</p></div><div class="section"><h3>⛽ 6. Excise Taxes (Fuel, Energy, etc.)</h3><p>Applies if your business involves specific goods:</p><p>Fuel (petrol, diesel), electricity & gas, alcohol & tobacco</p><p>These are included in prices, not paid separately by most startups.</p></div><div class="section"><h3>🌱 7. Environmental Taxes</h3><p>Carbon-related taxes, mainly via fuel and energy</p><p>Packaging taxes, if producing or importing goods</p></div><div class="section"><h3>🏙️ 8. Local / Municipal Taxes</h3><p>Limited in Estonia, but may include:</p><p>Advertising tax (rare)</p><p>Road / vehicle-related fees</p></div><div class="section"><h3>🚗 9. Car Tax</h3><p>If your startup provides a company car:</p><p>Tax based on engine power (kW)</p><p>Approx: €1.96 per kW/month × 1.33 social tax multiplier</p></div><div class="section"><h3>Useful Links</h3><button class="btn primary" onclick="window.open('https://www.emta.ee/', '_blank')">Estonian Tax and Customs Board</button></div>`; }
-function loadEResidency(){ showBusinessPage(); closeMenu(); document.getElementById('biz-content').innerHTML=`<h1>E-Residency</h1><p class="muted">Information for international founders who want to start and manage an Estonian company online.</p><div class="section"><h3>What it gives you</h3><p>Digital ID access to Estonian e-services, company administration and online signing.</p><p>Useful for founders who want to run an EU company remotely.</p></div><div class="section"><h3>Apply</h3><button class="btn primary" onclick="window.open('https://e-resident.gov.ee/', '_blank')">Apply for E-Residency</button></div>`; }
-
-const news=[{id:1,title:'Estonian Startup Ecosystem Update',summary:'Latest startup ecosystem updates, funding news and Silicon Port announcements.',article:'This article page can include the full summary of the news piece, key facts, startup names, funding numbers, and why it matters for Estonia.',source:'https://startupestonia.ee'},{id:2,title:'New Pilot Projects Opening Soon',summary:'Silicon Port is preparing new pilot project opportunities for founders and builders.',article:'This article can explain which pilot projects are opening, who can join, what the timeline is, and how the ecosystem can participate.',source:'https://startupestonia.ee'}];
-function loadNews(){ showInformationPage(); closeMenu(); let html='<h1>News</h1><p class="muted">Browse startup ecosystem news and open each article for full details.</p><div class="grid">'; news.forEach(n=>{ html+=`<div class="card" onclick="openNews(${n.id})"><h3>${n.title}</h3><p>${n.summary}</p></div>`; }); html+='</div>'; document.getElementById('info-content').innerHTML=html; }
-function openNews(id){ let n=news.find(x=>x.id===id); document.getElementById('info-content').innerHTML=`<h1>${n.title}</h1><p>${n.summary}</p><button class="btn primary" onclick="window.open('${n.source}', '_blank')">Original News Piece</button><button class="btn secondary" onclick="loadNews()">Back</button><div class="section"><h3>Article</h3><p>${n.article}</p></div>`; }
-function loadInfo(type){ showInformationPage(); closeMenu(); let html=''; if(type==='news') return loadNews(); if(type==='stats') html='<h1>Business Stats</h1><div class="section"><p>Key startup, investment, employment and company formation statistics for Estonia.</p></div>'; if(type==='history') html='<h1>History</h1><div class="section"><p>The story of Estonia as a digital nation, from e-government to startup ecosystem growth.</p></div>'; if(type==='about') html='<h1>About Us</h1><div class="section"><p>Silicon Port is a platform for mapping, connecting and growing the Estonian startup scene.</p></div>'; if(type==='contact') html='<h1>Contact</h1><div class="section"><p>Email: info@siliconport.ee</p></div>'; document.getElementById('info-content').innerHTML=html; }
-</script>
-</body>
-</html>
+      document.getElementById('biz-content').innerHTML = html;
+    })
+    .catch(err => {
+      document.getElementById('biz-content').innerHTML = '<p>Error loading tax data</p>';
+    });
+}

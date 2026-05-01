@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Bolt",
-      "tagline": "<style id=\"startup-card-image-css\">.card-img{height:160px;margin:-26px -26px 18px;background-size:cover;background-position:center;background-repeat:no-repeat;border-radius:26px 26px 0 0;}@media (max-width:640px){.card-img{height:150px;margin:-22px -22px 18px;border-radius:22px 22px 0 0;}}</style>Mobility super app",
+      "tagline": "Mobility super app",
       "description": "Estonian mobility company offering ride-hailing, scooters, car sharing and food delivery.",
       "industry": "Mobility",
       "founded": "2013",

@@ -1,0 +1,103 @@
+{
+  "title": "🇪🇪 Tax System 101 — Estonia (Startup Guide)",
+  "intro": [
+    "Estonia is widely considered one of the most startup-friendly tax systems in the world, mainly because profits are not taxed until they are distributed.",
+    "This allows companies to reinvest and scale faster without immediate tax pressure."
+  ],
+  "sections": [
+    {
+      "heading": "🏢 1. Corporate Income Tax",
+      "items": [
+        "<strong>0%</strong> on retained and reinvested profits",
+        "<strong>20%</strong> on distributed profits (dividends)",
+        "<strong>Example:</strong> If your startup earns €100,000 and reinvests it → €0 tax. If you distribute €100,000 → €20,000 tax.",
+        "<strong>Key advantage:</strong> You only pay tax when taking money out of the company."
+      ]
+    },
+    {
+      "heading": "👨‍💼 2. Salary & Payroll Taxes",
+      "items": [
+        "<strong>Employer pays:</strong>",
+        "Social Tax: 33% — 20% pension and 13% healthcare",
+        "<strong>Employee pays:</strong>",
+        "Income Tax: 20% flat rate",
+        "Unemployment Insurance: 1.6%",
+        "<strong>Employer additional:</strong> Unemployment Insurance: 0.8%"
+      ]
+    },
+    {
+      "heading": "💰 Minimum Salary (2026)",
+      "items": ["~€820/month gross (approx., updated yearly)"]
+    },
+    {
+      "heading": "📌 Example Salary Breakdown",
+      "items": [
+        "If gross salary = €2,000:",
+        "Employer total cost ≈ €2,660",
+        "Employee receives ≈ €1,550 net"
+      ]
+    },
+    {
+      "heading": "🧾 3. Value Added Tax (VAT)",
+      "items": [
+        "<strong>Standard rate:</strong> 22%",
+        "<strong>Reduced rates:</strong> 9% for books and accommodation",
+        "<strong>0%:</strong> exports",
+        "<strong>VAT Registration Threshold:</strong> €40,000 annual turnover"
+      ]
+    },
+    {
+      "heading": "📈 4. Dividends & Capital Gains",
+      "items": [
+        "<strong>Dividends:</strong> taxed at 20% at corporate level",
+        "No additional tax for individuals if already taxed",
+        "<strong>Capital Gains (individual):</strong> 20% income tax"
+      ]
+    },
+    {
+      "heading": "🏠 5. Land Tax (Real Estate)",
+      "items": [
+        "0.1% – 2.5% of land value annually",
+        "Set by local municipalities",
+        "<strong>Important:</strong> No property tax on buildings. Only land is taxed."
+      ]
+    },
+    {
+      "heading": "⛽ 6. Excise Taxes (Fuel, Energy, etc.)",
+      "items": [
+        "Applies if your business involves specific goods:",
+        "Fuel (petrol, diesel), electricity & gas, alcohol & tobacco",
+        "These are included in prices, not paid separately by most startups."
+      ]
+    },
+    {
+      "heading": "🌱 7. Environmental Taxes",
+      "items": [
+        "Carbon-related taxes, mainly via fuel and energy",
+        "Packaging taxes, if producing or importing goods"
+      ]
+    },
+    {
+      "heading": "🏙️ 8. Local / Municipal Taxes",
+      "items": [
+        "Limited in Estonia, but may include:",
+        "Advertising tax (rare)",
+        "Road / vehicle-related fees"
+      ]
+    },
+    {
+      "heading": "🚗 9. Car Tax",
+      "items": [
+        "If your startup provides a company car:",
+        "Tax based on engine power (kW)",
+        "Approx: €1.96 per kW/month × 1.33 social tax multiplier"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Estonian Tax and Customs Board",
+      "url": "https://www.emta.ee/"
+    }
+  ]
+}
